@@ -52,7 +52,7 @@ def fetch_news(location_name, product):
 
 def main():
     pincode = input("Enter pincode: ").strip()
-    product = input("Enter product name: ").strip()
+    product = input("Enter product category: ").strip()
     
     location_name = get_location_from_pincode(pincode)
     if not location_name:
