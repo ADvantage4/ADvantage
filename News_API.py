@@ -4,7 +4,6 @@ NEWS_API_URL = "https://newsapi.org/v2/everything"
 GEOCODE_API_URL = "https://nominatim.openstreetmap.org/search"
 API_KEY = "b33c8cca84c44b1fb0960a066c40800e"  
 
-
 def get_location_from_pincode(pincode):
     try:
         headers = {"User-Agent": "my-news-app/1.0"}
@@ -24,20 +23,20 @@ def get_location_from_pincode(pincode):
             city = address.get('city') or address.get('town') or address.get('village')
             state = address.get('state')
             return city or state
-        return None
 
+        return None
     except requests.exceptions.RequestException as e:
         print(f"Error fetching location data: {e}")
         return None
 
-
-def fetch_news(location_name):
-    params = {
-        'q': location_name,
-        'apiKey': API_KEY,
-        'language': 'en'
-    }
+def fetch_news(location_name, product):
     try:
+        query = f"{location_name} {product}"
+        params = {
+            'q': query,
+            'apiKey': API_KEY,
+            'language': 'en'
+        }
         response = requests.get(NEWS_API_URL, params=params)
         response.raise_for_status()
         news_data = response.json()
@@ -47,31 +46,29 @@ def fetch_news(location_name):
             return []
 
         return news_data.get("articles", [])
-
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching news data: {e}")
+        print(f"Error fetching news: {e}")
         return []
 
-
 def main():
-    pincode = input("Enter the pincode: ")
-    location = get_location_from_pincode(pincode)
-
-    if not location:
+    pincode = input("Enter pincode: ").strip()
+    product = input("Enter product name: ").strip()
+    
+    location_name = get_location_from_pincode(pincode)
+    if not location_name:
         print("Invalid pincode or location not found.")
         return
 
-    print(f"Fetching news for {location}...")
-    articles = fetch_news(location)
+    print(f"Fetching news for {location_name} related to {product}...\n")
+    articles = fetch_news(location_name, product)
 
-    if not articles:
-        print("No news articles found.")
+    if articles:
+        for idx, article in enumerate(articles[:5], start=1):  # Displaying top 5 articles
+            print(f"{idx}. {article['title']}")
+            print(f"   Source: {article['source']['name']}")
+            print(f"   URL: {article['url']}\n")
     else:
-        for idx, article in enumerate(articles, 1):
-            print(f"\n{idx}. {article.get('title')}")
-            print(f"Source: {article.get('source', {}).get('name')}")
-            print(f"URL: {article.get('url')}")
-
+        print("No relevant news found.")
 
 if __name__ == "__main__":
     main()
