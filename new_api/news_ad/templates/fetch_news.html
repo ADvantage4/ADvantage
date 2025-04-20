@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Fetcher</title>
+</head>
+<body>
+    <h2>Fetch News by Pincode and Product</h2>
+    <form id="newsForm">
+        <label>Pincode:</label><br>
+        <input type="text" id="pincode" name="pincode" required><br><br>
+
+        <label>Product:</label><br>
+        <input type="text" id="product" name="product" required><br><br>
+
+        <button type="button" onclick="fetchNews()">Fetch News</button>
+    </form>
+
+    <h3>News Results:</h3>
+    <pre id="newsResult"></pre>
+
+    <script>
+        async function fetchNews() {
+            const pincode = document.getElementById('pincode').value;
+            const product = document.getElementById('product').value;
+
+            const response = await fetch("http://127.0.0.1:8000/news/fetch-news/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ "pincode": pincode, "product": product })
+            });
+
+            const data = await response.json();
+            document.getElementById('newsResult').textContent = JSON.stringify(data, null, 2);
+        }
+    </script>
+</body>
+</html>
