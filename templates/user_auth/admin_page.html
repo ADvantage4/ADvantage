@@ -1,0 +1,87 @@
+{% extends "user_auth/base.html" %}
+{% load static %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+  <link
+    rel="stylesheet"
+    href="{% static 'user_auth/css/admin_dashboard.css' %}"
+  >
+{% endblock %}
+
+{% block content %}
+<main class="generate-home">
+
+  {# ——— center‐column with your stats ——— #}
+  <div class="stats-container">
+    <h1 class="stats-title">Admin Dashboard</h1>
+
+    <section class="stats-panel">
+      <h2>Total Registered Users</h2>
+      <p class="stats-number">{{ total_users }}</p>
+
+      <h3>Ads Sent by Tone</h3>
+      <ul class="stats-list">
+        {% for row in tone_breakdown %}
+          <li><strong>{{ row.tone|capfirst }}</strong>: {{ row.count }}</li>
+        {% empty %}
+          <li>No ads sent yet.</li>
+        {% endfor %}
+      </ul>
+
+      <h3>Ads Sent by Product</h3>
+      <ul class="stats-list">
+        {% for row in product_breakdown %}
+          <li><em>{{ row.product }}</em>: {{ row.count }}</li>
+        {% empty %}
+          <li>No ads sent yet.</li>
+        {% endfor %}
+      </ul>
+
+      <h3>Emails Delivered by Customer</h3>
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th>Customer Name</th>
+            <th>Total</th>
+            <th class="text-success">Success</th>
+            <th class="text-failed">Failed</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in customer_stats %}
+            <tr>
+              <td>{{ c.customer__name|default:"—" }}</td>
+              <td>{{ c.total }}</td>
+              <td class="text-success">{{ c.success }}</td>
+              <td class="text-failed">{{ c.failed }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4" class="no-data">
+                No email sends recorded yet.
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  {# ——— footer with the button down below ——— #}
+  <div class="action-footer">
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="generate-btn">
+        Add New Data & News
+      </button>
+    </form>
+  </div>
+
+  {# Snackbar for flash messages #}
+  <div id="snackbar">
+    {% for m in messages %}{{ m }}{% endfor %}
+  </div>
+</main>
+{% endblock %}
