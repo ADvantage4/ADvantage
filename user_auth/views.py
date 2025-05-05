@@ -520,6 +520,7 @@ def select_ads(request, request_id):
     ad_request = get_object_or_404(AdRequest, id=request_id)
 
     if request.method == "POST":
+        # rebuild the edited ads list
         ads = []
         i = 1
         while f"ad_{i}" in request.POST:
@@ -532,75 +533,66 @@ def select_ads(request, request_id):
                 raise ValueError
         except ValueError:
             messages.error(request, "Please select an ad first.")
-            return redirect("dashboard1")  # Redirect to dashboard2 if no ad is selected
+            return redirect("mainpage")
 
         chosen_text = ads[picked - 1]
         ad_request.chosen_ad = chosen_text
         ad_request.save()
 
-        # Check the action value coming from the POST request
-        action = request.POST.get("action")
-        print(f"DEBUG - Action: {action}")  # Debugging line to print the action value
-
-        if action == "send":
-            # Handle 'send' action (sending emails, etc.)
+        if request.POST.get("action") == "send":
             subject = f"Your Campaign Update: {ad_request.product}"
 
+            # A) if CSV uploaded
             if ad_request.csv_file:
                 total = sent = 0
                 with open(ad_request.csv_file.path, newline="", encoding="utf-8") as fh:
                     reader = csv.DictReader(fh)
                     for row in reader:
                         total += 1
-                        name = row.get("name", "").strip() or "Customer"
+                        name  = row.get("name", "").strip() or "Customer"
                         email = row.get("email", "").strip()
-                        body = f"Hello {name},\n\n{chosen_text}"
-                        res = send_email(email, subject, body)
+                        body  = f"Hello {name},\n\n{chosen_text}"
+                        res   = send_email(email, subject, body)
 
                         SentEmail.objects.create(
-                            ad_request=ad_request,
-                            customer=Customer.objects.filter(email=email).first(),
-                            email_address=email,
-                            success=res.get("success", False),
-                            error_message=res.get("error", "")
+                            ad_request    = ad_request,
+                            customer      = Customer.objects.filter(email=email).first(),
+                            email_address = email,
+                            success       = res.get("success", False),
+                            error_message = res.get("error", "")
                         )
                         if res.get("success"):
                             sent += 1
 
                 messages.success(request, f"Sent {sent}/{total} emails.")
-                return redirect("dashboard1")  # Redirect to dashboard1 after sending ads
+                return redirect("dashboard1")
 
+            # B) otherwise blast to all DB customers
             else:
                 total = Customer.objects.exclude(email="").count()
                 sent = 0
                 for cust in Customer.objects.exclude(email=""):
                     body = f"Hello {cust.name or 'Customer'},\n\n{chosen_text}"
-                    res = send_email(cust.email, subject, body)
+                    res  = send_email(cust.email, subject, body)
 
                     SentEmail.objects.create(
-                        ad_request=ad_request,
-                        customer=cust,
-                        email_address=cust.email,
-                        success=res.get("success", False),
-                        error_message=res.get("error", "")
+                        ad_request    = ad_request,
+                        customer      = cust,
+                        email_address = cust.email,
+                        success       = res.get("success", False),
+                        error_message = res.get("error", "")
                     )
                     if res.get("success"):
                         sent += 1
 
                 messages.success(request, f"Sent {sent}/{total} emails.")
-                return redirect("dashboard1")  # Redirect to dashboard1 after sending ads
-
-        elif action == "save":
-            # Handle 'save' action (saving the ad)
-            messages.success(request, "Ad saved!")
-            return redirect("dashboard2")  # Redirect to dashboard2 after saving ads
+                return redirect("dashboard1")
 
         else:
-            # Handle case where action is neither 'send' nor 'save'
-            messages.error(request, "Invalid action provided.")
-            return redirect("mainpage")  # Redirect to main page if invalid action
+            messages.success(request, "Ad saved!")
+            return redirect("dashboard2")
 
-    return redirect("mainpage") 
+    return redirect("mainpage")
 
 def admin_login(request):
     if request.method == "POST":
