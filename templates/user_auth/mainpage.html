@@ -23,27 +23,34 @@
           class="logo"
         />
         <nav class="nav-menu">
-          <span class="nav-item active">Generate</span>
+          <a href="{% url 'homepage' %}" class="nav-item">Home</a>
+          <a href="{% url 'mainpage' %}" class="nav-item active">Generate</a>
+          <a href="{% url 'account' %}" class="nav-item">Account</a>
         </nav>
-        <div class="user-toggle">
-          <button
-            class="toggle-btn {% if request.path == '/auth/mainpage/' %}active{% endif %}"
-            onclick="window.location.href='{% url 'mainpage' %}';"
-          >User</button>
-          <button
-            class="toggle-btn {% if request.path == '/auth/admin-login/' %}active{% endif %}"
-            onclick="window.location.href='{% url 'admin_login' %}'"
-          >Admin</button>
+        <div class="user-controls">
+          <div class="user-toggle">
+            <button
+              class="toggle-btn {% if request.path == '/auth/mainpage/' %}active{% endif %}"
+              onclick="window.location.href='{% url 'mainpage' %}';"
+            >
+              User
+            </button>
+            <button
+              class="toggle-btn {% if request.path == '/auth/admin-login/' %}active{% endif %}"
+              onclick="window.location.href='{% url 'admin_login' %}'"
+            >
+              Admin
+            </button>
+          </div>
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/647022f4aa7569d0e97dd6c4892abed130ac0e52dcde0805db5eea950c08f2e3"
+            alt="Settings"
+            class="settings-icon"
+          />
         </div>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/647022f4aa7569d0e97dd6c4892abed130ac0e52dcde0805db5eea950c08f2e3"
-          alt="Settings"
-          class="settings-icon"
-        />
       </header>
 
       <div class="main-content">
-
         <!-- form -->
         <div class="form-section">
           <section class="generate-form">
@@ -164,7 +171,6 @@
             meaningful text generation.
           </p>
         </div>
-
       </div>
     </main>
 

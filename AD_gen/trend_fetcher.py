@@ -2,9 +2,9 @@ import psycopg2
 
 def fetch_trends_from_db(table_name="google_trends_now", limit=10):
     conn = psycopg2.connect(
-        dbname="advantage_db",
-        user="harsha",
-        password="0317",
+        dbname="advantage_db2",
+        user="pranav",
+        password="2104",
         host="localhost",
         port="5432"
     )

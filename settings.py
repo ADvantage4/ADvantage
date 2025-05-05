@@ -22,6 +22,8 @@ BASE_DIR = Path(__file__).resolve().parent
 env = environ.Env()
 environ.Env.read_env()
 
+load_dotenv()
+
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
@@ -100,11 +102,11 @@ WSGI_APPLICATION = 'wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'advantage_db2',
-        'USER': 'harsha',
-        'PASSWORD': '0317',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME'),  # Fetch from .env file
+        'USER': os.getenv('DB_USER'),  # Fetch from .env file
+        'PASSWORD': os.getenv('DB_PASSWORD'),  # Fetch from .env file
+        'HOST': os.getenv('DB_HOST'),  # Fetch from .env file
+        'PORT': os.getenv('DB_PORT', '5432'),  # Fetch from .env file or default to 5432
     }
 }
 

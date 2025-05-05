@@ -9,8 +9,8 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 def get_top_trends_from_db(limit=5):
     conn = psycopg2.connect(
         dbname="advantage_db2",
-        user="harsha",
-        password="0317",
+        user="pranav",
+        password="2104",
         host="localhost",
         port="5432"
     )
@@ -27,7 +27,7 @@ def get_top_trends_from_db(limit=5):
 
 def generate_ads(product, description, trends):
     prompt = (
-        f"You are a trend-savvy AI ad copywriter. Create short, relevant ad copy for a product named **{product}**.\n"
+        f"You are a trend-savvy AI ad salesman. Create short, relevant ad copy for a product named **{product}**.\n"
         f"Product Description: {description}\n\n"
         f"Write one creative, engaging ad for each of the following trending topics.\n\n"
     )

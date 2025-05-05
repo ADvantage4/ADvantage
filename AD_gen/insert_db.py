@@ -1,6 +1,12 @@
 import psycopg2
 from datetime import datetime, timedelta, date
 
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 def clean_volume(vol_str):
     try:
         vol_str = vol_str.replace("+", "").strip().upper()
@@ -37,12 +43,12 @@ def parse_start_time(start_str):
 
 def insert_trends_to_db(trends, table_name="google_trends_now"):
     conn = psycopg2.connect(
-        dbname="advantage_db2",
-        user="harsha",
-        password="0317",
-        host="localhost",
-        port="5432"
-    )
+    dbname=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    host=os.getenv("DB_HOST"),
+    port=os.getenv("DB_PORT", "5432")  # Default to 5432 if not set
+)
     cursor = conn.cursor()
 
     for trend in trends:

@@ -1,15 +1,22 @@
-from trend_fetcher import fetch_trends_from_db
-from trend_research_agent import google_search
-from trend_summarizer_agent import summarize_trend
+from trend_summarizer_agent import summarizer
 
-# Fetch top 5 current trends
-trends = fetch_trends_from_db(table_name="google_trends_now", limit=5)
+# Sample test data
+TEST_TREND = "PBKS vs LSG IPL Match"
+TEST_CONTENT = """
+• Punjab Kings defeated Lucknow Super Giants by 5 wickets
+• Match played on May 4th at Ekana Stadium
+• Shikhar Dhawan scored 70 runs
+• Arshdeep Singh took 3 wickets
+• Attendance: 45,000 fans
+"""
 
-for trend in trends:
-    print(f"\n🔎 Searching: {trend}")
-    search_results = google_search(trend)
+if __name__ == "__main__":
+    print("Testing Trend Summarizer...")
+    print(f"Trend: {TEST_TREND}")
+    print("Generating summary...\n")
     
-    print(f"🧠 Summarizing: {trend}")
-    summary = summarize_trend(trend, search_results)
+    result = summarizer.summarize_trend(TEST_TREND, TEST_CONTENT)
     
-    print(f"📝 Final Summary for '{trend}':\n{summary}\n{'-'*60}")
+    print("=== SUMMARY RESULT ===")
+    print(result)
+    print("\nTest completed.")

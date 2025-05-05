@@ -88,7 +88,7 @@ body {
 /* Main content */
 .main-content {
   display: flex;
-  margin: 40px 65px;
+  margin: 40px 65px 40px 65px;
   margin-right: 0;
   gap: 2rem;
   flex-wrap: wrap;
@@ -102,7 +102,7 @@ body {
 
 .generate-form {
   padding: 3rem 2.5rem;
-  background-color: pink;
+  background-color: white;
   border-radius: 1rem;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
 }
@@ -262,6 +262,8 @@ hr {
   text-align: center;
   align-self: start;
   min-width: 300px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 .main-illustration {
@@ -289,9 +291,9 @@ hr {
   cursor: pointer;
   min-height: 60px;
   width: 14rem;
-  /* margin: 2.25rem 0; */
 }
 
+/* AI Info Section */
 .ai-info {
   background-color: rgb(240, 249, 255);
   border-radius: 0.75rem;
@@ -303,6 +305,7 @@ hr {
   line-height: 1.25rem;
 }
 
+/* Advertisement Content Section */
 .ad-content {
   background-color: #f5fcff;
   color: black;
@@ -311,18 +314,16 @@ hr {
   font-family: "Quicksand", sans-serif;
   line-height: 1.6;
   width: 800px;
-  font-size: 25px;
-  margin: 30px auto;
-}
-.ad-content {
-  margin-bottom: 40px;
   font-size: 20px;
+  margin: 30px auto 40px;
 }
+
 .ad-content strong {
   font-size: 20px;
   color: #fffefe;
 }
-/* Styling for individual ads */
+
+/* Individual Ads */
 .ad-item {
   background-color: #f8f9fa;
   border: 1px solid #ccc;
@@ -331,12 +332,10 @@ hr {
   padding: 15px;
 }
 
-/* Highlight ad number */
 .ad-item h3 {
   color: #187ff590;
 }
 
-/* Add spacing between trend and ad content */
 .ad-item .trend,
 .ad-item .ad-content {
   margin-bottom: 10px;
@@ -351,7 +350,7 @@ hr {
 
   .form-section,
   .illustration-section {
-    width: 100%;
+    width: 80%;
   }
 
   .tone-scope-group {
@@ -369,6 +368,12 @@ hr {
 
   .generate-btn {
     width: 100%;
+  }
+
+  .ad-content {
+    width: 100%;
+    font-size: 18px;
+    padding: 20px;
   }
 }
 
@@ -396,27 +401,105 @@ hr {
 /* ---------- Row & Inputs ---------- */
 .ad-edit-row {
   display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+  align-items: center;
+  gap: 20px; /* Increased space between elements */
+  margin-bottom: 15px; /* More space between rows */
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 20px;
+  min-height: 60px;
+  margin-top: 10px;
 }
 
 .ad-select {
-  margin-top: var(--spacing-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Space between radio button and text area */
+}
+
+.ad-select label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #187ef5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #155db1; /* Darker shade on hover */
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 /* ---------- Editable Textarea ---------- */
 .ad-textarea {
   flex: 1;
-  resize: vertical;
-  padding: var(--spacing-xs);
+  padding: 15px;
   font-family: inherit;
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
   color: var(--color-text);
-  background: var(--color-textarea-bg);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: 0.5rem;
+  background-color: #f2f4f5;
+  min-height: 100px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.ad-textarea:focus {
+  border-color: #187ef5;
+  outline: none;
+}
+
+.ad-select:checked + .ad-textarea {
+  border-color: #187ef5;
+}
+
+input[type="radio"] {
+  margin-top: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #187ef5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #155db1;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 /* ---------- Buttons Common ---------- */
@@ -435,17 +518,25 @@ hr {
 
 /* ---------- Save Button ---------- */
 .save-ads-btn {
-  background-color: var(--color-btn-save);
+  background-color: #f6f6f6;
+  color: #062732;
+  font-weight: 200;
   margin-right: var(--spacing-sm);
 }
 .save-ads-btn:hover {
-  background-color: var(--color-btn-save-hover);
+  background-color: var(--color-btn-send);
+  color: #fff;
+  font-weight: 200;
 }
 
 /* ---------- Send Button ---------- */
 .send-ads-btn {
-  background-color: var(--color-btn-send);
+  background-color: #f6f6f6;
+  color: #062732;
+  font-weight: 200;
 }
 .send-ads-btn:hover {
-  background-color: var(--color-btn-send-hover);
+  background-color: var(--color-btn-send);
+  color: #fff;
+  font-weight: 200;
 }
