@@ -2,7 +2,15 @@
 
 Welcome to the official repository for the [ADvantage Platform](https://github.com/ADvantage4/ADvantage) - a personalized AI-based ad generation and campaign manager.
 
-This guide will help you run the ADvantage platform **locally** on your machine.
+## 🎥 Deployment Video
+
+Watch the complete video to understand how it is running locally:  
+[▶️ Click to Watch on Google Drive](https://drive.google.com/file/d/1KeWCzw6tdsMkPh0RsnudlJuqeeJiG-As/view?usp=drivesdk)
+
+---
+
+
+This guide will help you run the ADvantage platform **locally** on your machine, follow it step-by-step.
 
 ---
 
