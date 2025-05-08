@@ -95,8 +95,8 @@ DB_PORT=5432
 
 ```env
 # Google Trends & Search Tokens
-GOOGLE_CX=40ea6c3fbd2fd4a4c
-GOOGLE_API_KEY=AIzaSyCfv0yf15ZXZMZV0d89ckFFVZ7xEdpG_3U
+GOOGLE_CX=YOUR_GOOGLE_CX_KEY
+GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
 
 # OpenAI API Key
 OPENAI_API_KEY=your-own-openai-api-key  # Replace this with your key
