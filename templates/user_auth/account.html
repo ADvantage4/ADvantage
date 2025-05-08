@@ -39,11 +39,13 @@
             Admin
           </button>
         </div>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/647022f4aa7569d0e97dd6c4892abed130ac0e52dcde0805db5eea950c08f2e3"
-          alt="Settings"
-          class="settings-icon"
-        />
+        <a href="{% url 'login' %}">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/647022f4aa7569d0e97dd6c4892abed130ac0e52dcde0805db5eea950c08f2e3"
+            alt="Settings"
+            class="settings-icon"
+          />
+        </a>
       </div>
     </header>
 
@@ -55,8 +57,13 @@
           <h2>Account info</h2>
           <button class="edit-btn">✏️ Edit</button>
         </div>
-        <div class="info-row"><span>Name</span><strong>{{ user.get_full_name|default:"Not set" }}</strong></div>
-        <div class="info-row"><span>Email</span><strong>{{ user.email|default:"Not set" }}</strong></div>
+        <div class="info-row">
+          <span>Name</span
+          ><strong>{{ user.get_full_name|default:"Not set" }}</strong>
+        </div>
+        <div class="info-row">
+          <span>Email</span><strong>{{ user.email|default:"Not set" }}</strong>
+        </div>
 
         <div class="info-row">
           <span>Department</span><strong class="muted">Not set</strong>

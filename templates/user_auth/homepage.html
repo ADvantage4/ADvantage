@@ -40,11 +40,13 @@
             Admin
           </button>
         </div>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/647022f4aa7569d0e97dd6c4892abed130ac0e52dcde0805db5eea950c08f2e3"
-          alt="Settings"
-          class="settings-icon"
-        />
+        <a href="{% url 'login' %}">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/647022f4aa7569d0e97dd6c4892abed130ac0e52dcde0805db5eea950c08f2e3"
+            alt="Settings"
+            class="settings-icon"
+          />
+        </a>
       </div>
     </header>
     <!-- Hero Section -->
@@ -77,61 +79,58 @@
       </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+      <h2 class="section-title">Payment Plans</h2>
+      <h1>Choose Your Plan</h1>
 
-      
-      <!-- Pricing Section -->
-  <section class="pricing-section">
-    <h2 class="section-title">Payment Plans</h2>
-    <h1>Choose Your Plan</h1>
+      <div class="plans-container">
+        <!-- Starter Plan -->
+        <div class="plan-card">
+          <h2>Starter</h2>
+          <p class="price">₹0/month</p>
+          <p class="description">Best for testing & personal use</p>
+          <ul>
+            <li>✓ 3 ad campaigns/month</li>
+            <li>✓ Basic AI suggestions</li>
+            <li>✓ 1 deployment channel</li>
+            <li>✓ Basic visual assets</li>
+            <li>✓ ADvantage branding</li>
+          </ul>
+          <button>Select Starter</button>
+        </div>
 
-    <div class="plans-container">
-      <!-- Starter Plan -->
-      <div class="plan-card">
-        <h2>Starter</h2>
-        <p class="price">₹0/month</p>
-        <p class="description">Best for testing & personal use</p>
-        <ul>
-          <li>✓ 3 ad campaigns/month</li>
-          <li>✓ Basic AI suggestions</li>
-          <li>✓ 1 deployment channel</li>
-          <li>✓ Basic visual assets</li>
-          <li>✓ ADvantage branding</li>
-        </ul>
-        <button>Select Starter</button>
+        <!-- Growth Plan -->
+        <div class="plan-card highlight">
+          <h2>Growth</h2>
+          <p class="price">₹199/month</p>
+          <p class="description">For small teams & student businesses</p>
+          <ul>
+            <li>✓ 20 ad campaigns/month</li>
+            <li>✓ Full AI-powered local data</li>
+            <li>✓ 3 deployment channels</li>
+            <li>✓ Stock visuals & templates</li>
+            <li>✓ Performance analytics</li>
+          </ul>
+          <button>Select Growth</button>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="plan-card">
+          <h2>Pro</h2>
+          <p class="price">₹499/month</p>
+          <p class="description">For franchises & marketing teams</p>
+          <ul>
+            <li>✓ Unlimited ad campaigns</li>
+            <li>✓ Advanced targeting & A/B testing</li>
+            <li>✓ All channel access</li>
+            <li>✓ Custom templates</li>
+            <li>✓ Full analytics + team tools</li>
+          </ul>
+          <button>Select Pro</button>
+        </div>
       </div>
-
-      <!-- Growth Plan -->
-      <div class="plan-card highlight">
-        <h2>Growth</h2>
-        <p class="price">₹199/month</p>
-        <p class="description">For small teams & student businesses</p>
-        <ul>
-          <li>✓ 20 ad campaigns/month</li>
-          <li>✓ Full AI-powered local data</li>
-          <li>✓ 3 deployment channels</li>
-          <li>✓ Stock visuals & templates</li>
-          <li>✓ Performance analytics</li>
-        </ul>
-        <button>Select Growth</button>
-      </div>
-
-      <!-- Pro Plan -->
-      <div class="plan-card">
-        <h2>Pro</h2>
-        <p class="price">₹499/month</p>
-        <p class="description">For franchises & marketing teams</p>
-        <ul>
-          <li>✓ Unlimited ad campaigns</li>
-          <li>✓ Advanced targeting & A/B testing</li>
-          <li>✓ All channel access</li>
-          <li>✓ Custom templates</li>
-          <li>✓ Full analytics + team tools</li>
-        </ul>
-        <button>Select Pro</button>
-      </div>
-    </div>
-  </section>
-
+    </section>
 
     <!-- CTA -->
     <section class="cta">

@@ -59,6 +59,7 @@ h2 {
   color: #187ef5;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .edit-btn.blue {
@@ -122,6 +123,7 @@ h2 {
   display: flex;
   gap: 2.5rem;
   font-weight: 600;
+  align-items: center;
 }
 
 .user-toggle {

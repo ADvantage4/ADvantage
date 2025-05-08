@@ -48,6 +48,7 @@ body {
   display: flex;
   gap: 2.5rem;
   font-weight: 600;
+  align-items: center;
 }
 
 .user-toggle {
