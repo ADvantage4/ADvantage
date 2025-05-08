@@ -1,6 +1,6 @@
-# ADvantage Platform – Local Setup Guide
+# ADvantage Platform - Local Setup Guide
 
-Welcome to the official repository for the [ADvantage Platform](https://github.com/ADvantage4/ADvantage) — a personalized AI-based ad generation and campaign manager.
+Welcome to the official repository for the [ADvantage Platform](https://github.com/ADvantage4/ADvantage) - a personalized AI-based ad generation and campaign manager.
 
 This guide will help you run the ADvantage platform **locally** on your machine.
 
@@ -70,13 +70,18 @@ DATABASES = {
 ### In the **root directory**, create a `.env` file:
 
 ```env
-EMAIL_HOST_USER=GMAIL_ADDRESS_TO_PUSH
-EMAIL_HOST_PASSWORD=PASSWORD
+EMAIL_HOST_USER=your-email@gmail.com            # Replace with your Gmail or SMTP email
+EMAIL_HOST_PASSWORD=your-app-password           # Replace with your email password or app-specific password
+
 DATABASE_URL=postgresql://advantage_admin:Advantage%40123@localhost:5432/advantage_db
 SECRET_KEY=your-django-secret-key
 DEBUG=True
-OPENAI_API_KEY=your-own-openai-api-key  # Replace this with your personal key
 
+# === API Keys ===
+SERPAPI_KEY=your-serpapi-key                    # Optional: For Google scraping
+OPENAI_API_KEY=your-own-openai-api-key          # Replace this with your personal OpenAI key
+
+# === PostgreSQL Database Configuration ===
 DB_NAME=advantage_db2
 DB_USER=your-db-username
 DB_PASSWORD=your-db-password
@@ -90,10 +95,11 @@ DB_PORT=5432
 
 ```env
 # Google Trends & Search Tokens
-GOOGLE_CX=YOUR_CX_KEY
-GOOGLE_API_KEY=YOUR_API_KEY
+GOOGLE_CX=40ea6c3fbd2fd4a4c
+GOOGLE_API_KEY=AIzaSyCfv0yf15ZXZMZV0d89ckFFVZ7xEdpG_3U
+
 # OpenAI API Key
-OPENAI_API_KEY=YOUR_API_KEY  # Replace this with your key
+OPENAI_API_KEY=your-own-openai-api-key  # Replace this with your key
 
 # Database Connection
 DB_NAME=advantage_db2
@@ -148,7 +154,7 @@ python manage.py migrate
 
 ---
 
-## ▶️Run the Development Server
+## ▶Run the Development Server
 
 ```bash
 python manage.py runserver
