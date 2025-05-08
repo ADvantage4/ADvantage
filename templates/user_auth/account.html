@@ -55,9 +55,9 @@
           <h2>Account info</h2>
           <button class="edit-btn">✏️ Edit</button>
         </div>
-        <div class="info-row"><span>Name</span><strong></strong></div>
-        <div class="info-row"><span>Username</span><strong></strong></div>
-        <div class="info-row"><span>Email</span><strong></strong></div>
+        <div class="info-row"><span>Name</span><strong>{{ user.get_full_name|default:"Not set" }}</strong></div>
+        <div class="info-row"><span>Email</span><strong>{{ user.email|default:"Not set" }}</strong></div>
+
         <div class="info-row">
           <span>Department</span><strong class="muted">Not set</strong>
         </div>
@@ -69,7 +69,7 @@
       <section class="section">
         <div class="section-header">
           <h2>Password change</h2>
-          <button class="edit-btn">✏️ Change</button>
+          <a href="{% url 'forgot-password' %}" class="edit-btn">✏️ Change</a>
         </div>
         <p class="note">
           A valid password must contain a minimum of 12 characters, and a

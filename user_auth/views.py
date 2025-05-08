@@ -474,8 +474,6 @@ def generate_campaign(request):
             include_tags = bool(request.POST.get("include_hashtags"))
             ad_request = form.save(commit=False)
             ad_request.user = request.user
-
-            ad_request = form.save(commit=False)
             ad_request.scope = ad_request.scope or "global"
             ad_request.include_hashtags = bool(request.POST.get("include_hashtags"))
             ad_request.save()
@@ -516,6 +514,8 @@ def generate_campaign(request):
 
     return redirect("mainpage")
 
+from django.utils.timezone import now  # Make sure this is imported
+
 def select_ads(request, request_id):
     ad_request = get_object_or_404(AdRequest, id=request_id)
 
@@ -539,6 +539,8 @@ def select_ads(request, request_id):
         ad_request.chosen_ad = chosen_text
         ad_request.save()
 
+        user = ad_request.user or request.user  # fallback to current user if needed
+
         if request.POST.get("action") == "send":
             subject = f"Your Campaign Update: {ad_request.product}"
 
@@ -556,10 +558,12 @@ def select_ads(request, request_id):
 
                         SentEmail.objects.create(
                             ad_request    = ad_request,
-                            customer      = Customer.objects.filter(email=email).first(),
+                            user          = user,  # ✅ store the generator
+                            customer      = None,
                             email_address = email,
                             success       = res.get("success", False),
-                            error_message = res.get("error", "")
+                            error_message = res.get("error", ""),
+                            sent_at       = now(),  # ✅ consistent time
                         )
                         if res.get("success"):
                             sent += 1
@@ -577,10 +581,12 @@ def select_ads(request, request_id):
 
                     SentEmail.objects.create(
                         ad_request    = ad_request,
+                        user          = ad_request.user,  # ✅ store the generator
                         customer      = cust,
                         email_address = cust.email,
                         success       = res.get("success", False),
-                        error_message = res.get("error", "")
+                        error_message = res.get("error", ""),
+                        sent_at       = now(),  # ✅ consistent time
                     )
                     if res.get("success"):
                         sent += 1
@@ -618,40 +624,46 @@ def admin_page(request):
         messages.success(request, "7-day trends data updated successfully!")
         return redirect("admin_page")
 
-    # 1) total number of registered users
     total_users = get_user_model().objects.count()
 
-    # 2) breakdown of ads by tone
     sent_ads = AdRequest.objects.filter(chosen_ad__isnull=False)
+
     tone_breakdown = (
-        sent_ads
-          .values("tone")
-          .annotate(count=Count("id"))
-          .order_by("-count")
+        sent_ads.values("tone")
+        .annotate(count=Count("id"))
+        .order_by("-count")
     )
 
-    # 3) breakdown of ads by product
     product_breakdown = (
-        sent_ads
-          .values("product")
-          .annotate(count=Count("id"))
-          .order_by("-count")
+        sent_ads.values("product")
+        .annotate(count=Count("id"))
+        .order_by("-count")
     )
 
-    # 4) NEW: ads sent per system‐user
     user_stats = (
-        sent_ads
-          .values("user__first_name", "user__last_name")
-          .annotate(sent_ads=Count("id"))
-          .order_by("-sent_ads")
+        sent_ads.values("user__first_name", "user__last_name")
+        .annotate(sent_ads=Count("id"))
+        .order_by("-sent_ads")
+    )
+
+    # ✅ FIXED: Add this block properly
+    email_logs = (
+        SentEmail.objects
+        .select_related("ad_request", "ad_request__user")
+        .order_by("-sent_at")[:10]
     )
 
     return render(request, "user_auth/admin_page.html", {
-        "total_users":       total_users,
-        "tone_breakdown":    tone_breakdown,
+        "total_users": total_users,
+        "tone_breakdown": tone_breakdown,
         "product_breakdown": product_breakdown,
-        "user_stats":        user_stats,
+        "user_stats": user_stats,
+        "email_logs": email_logs,  # ✅ Make sure this gets passed
     })
+
+
+
+
 
 def dashboard1(request):
     return render(request, 'user_auth/dashboard1.html')  # Ensure you have this template file in your templates folder
@@ -666,4 +678,5 @@ def pricing(request):
     return render(request, "user_auth/pricing.html")
 
 def account_settings(request):
-    return render(request, "user_auth/account.html")
+    user = request.user
+    return render(request, "user_auth/account.html", {"user": user})
