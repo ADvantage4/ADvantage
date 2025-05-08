@@ -5,11 +5,14 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 
-# ——— Hard-coded SMTP credentials ———
-SMTP_SERVER   = "smtp.gmail.com"
-SMTP_PORT     = 587
-USERNAME      = "advantage.bluemelon@gmail.com"
-PASSWORD      = "igvs omqo rmhp pesr"   # or OAuth2-backed app password
+from dotenv import load_dotenv
+load_dotenv()
+
+SMTP_SERVER = os.getenv("SMTP_SERVER")
+SMTP_PORT   = int(os.getenv("SMTP_PORT"))  # cast to int if needed
+USERNAME    = os.getenv("USERNAME")
+PASSWORD    = os.getenv("PASSWORD")
+# or OAuth2-backed app password
 
 # ——— Logging setup ———
 logging.basicConfig(

@@ -16,6 +16,7 @@ from .trend_summarizer_agent import summarize_trend
 from .insert_db import insert_trends_to_db
 
 
+
 def scrape_daily_trends_7d():
     chrome_options = Options()
     # chrome_options.add_argument("--headless")  # optionally headless

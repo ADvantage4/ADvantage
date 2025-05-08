@@ -49,7 +49,7 @@ DEBUG = env.bool('DEBUG', default=True)
 
 load_dotenv()  # Load environment variables
 
-ALLOWED_HOSTS = ['advantage-eight.vercel.app','advantage-git-main-nsahithi04s-projects.vercel.app','advantage-f8sw0cqzb-nsahithi04s-projects.vercel.app','127.0.0.1','advantage-1nuq1k9b9-nsahithi04s-projects.vercel.app','advantage-g7y8kaxq6-nsahithi04s-projects.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 

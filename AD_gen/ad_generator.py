@@ -31,7 +31,7 @@ class AdGenerator:
             "host": os.getenv("DB_HOST"),
             "port": os.getenv("DB_PORT"),
         }
-        self.model = os.getenv("AD_MODEL", "gpt-3.5-turbo")
+        self.model = os.getenv("AD_MODEL", "gpt-4o")
         self.max_tokens = int(os.getenv("AD_MAX_TOKENS", 500))
         self.temperature = float(os.getenv("AD_TEMP", 0.8))
         

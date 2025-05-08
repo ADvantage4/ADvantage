@@ -8,12 +8,12 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def get_top_trends_from_db(limit=5):
     conn = psycopg2.connect(
-        dbname="advantage_db2",
-        user="pranav",
-        password="2104",
-        host="localhost",
-        port="5432"
-    )
+    dbname=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    host=os.getenv("DB_HOST"),
+    port=os.getenv("DB_PORT", "5432")  # Default to 5432 if not set
+)
     cursor = conn.cursor()
     cursor.execute("""
         SELECT topic, summary FROM google_trends_now

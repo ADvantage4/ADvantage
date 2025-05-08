@@ -200,6 +200,7 @@ h1 {
 
 .plan-card:hover {
   transform: translateY(-5px);
+  background-color: #187ff538;
 }
 
 .plan-card h2 {
@@ -255,7 +256,7 @@ h1 {
 
 /* Highlighted Plan */
 .highlight {
-  border: 2px solid #187ef5;
+  /* border: 2px solid #187ef5; */
   background-color: white; /* Removed blue fill */
 }
 /* Footer */
