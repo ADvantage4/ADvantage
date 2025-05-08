@@ -22,3 +22,28 @@ media/
 
 .DS_Store
 .env
+
+# Byte-compiled / cached files
+__pycache__/
+*.py[cod]
+*$py.class
+migrations/
+# Virtual environment
+venv/
+env/
+myenv/
+
+# Database files
+db.sqlite3
+
+# Django static and media files
+staticfiles/
+media/
+
+# IDE-specific files
+.vscode/
+.idea/
+*.swp
+
+.DS_Store
+.env
