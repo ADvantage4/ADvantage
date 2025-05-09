@@ -56,23 +56,6 @@ cd ..
 
 ## Database Configuration
 
-### Update `settings.py` with the following:
-
-```python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'advantage_db2',
-        'USER': 'postgres',
-        'PASSWORD': 'yourpass',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-```
-
----
-
 ## Create `.env` Files
 
 ### In the **root directory**, create a `.env` file:
