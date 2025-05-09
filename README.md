@@ -81,7 +81,7 @@ DATABASES = {
 EMAIL_HOST_USER=your-email@gmail.com            # Replace with your Gmail or SMTP email
 EMAIL_HOST_PASSWORD=your-app-password           # Replace with your email password or app-specific password
 
-DATABASE_URL=postgresql://advantage_admin:Advantage%40123@localhost:5432/advantage_db
+DATABASE_URL=your_db_url 
 SECRET_KEY=your-django-secret-key
 DEBUG=True
 
